@@ -1,58 +1,63 @@
-# Target-detection-apple
+# Spectral Similarity Measures
+- Spectral Angle Mapper (SAM)
+- Spectral Information Divergence (SID)
+- Constrained Energy Minimization (CEM)
 
-
-## 📐 CEM 公式
-Constrained Energy Minimization（CEM）是一種經典的目標檢測方法，其核心思想是在保留目標響應的前提下最小化背景響應能量。
-這是一種線性濾波器方法，常用於高光譜影像目標偵測，效果穩定且具備理論支持。
-
-<!-- 黑底主題 -->
-<img src="sam_formula_dark.png#gh-dark-mode-only" alt="SAM公式（深色）" />
-
-<!-- 白底主題 -->
-<img src="sam_formula_light.png#gh-light-mode-only" alt="SAM公式（淺色）" />
-
-
-
-### 📘 符號說明：
-
-- `r = [r₁, r₂, ..., r_B]`：參考光譜向量（**target spectrum**）
-- `d = [d₁, d₂, ..., d_B]`：像素光譜向量（**image spectrum**）
-- `R`：背景協方差矩陣（通常是整張影像或選定背景區域的樣本共變異矩陣）
-- `w_CEM`：CEM 濾波器權重向量
-- `y`：該像素經過 CEM 濾波器後的回應值（越大代表越像目標）
-- `B`：光譜波段數
+這些方法廣泛應用於高光譜影像分析、目標偵測與分類。
 
 ---
 
-## 📐 SID 公式
-SID 是一種衡量兩個光譜向量之間機率分布差異的指標，考慮的是光譜形狀的機率分布差異，對細微差異更敏感，常用於高光譜影像分類與目標偵測。
+## 📐 Spectral Angle Mapper (SAM)
 
-![SID](./sid.png)
----
+SAM 用來計算兩個光譜向量之間的夾角，量測其相似性。角度越小，表示越相似。
 
-### 📘 符號說明：
+<!-- SAM 公式圖片 -->
+<img src="sam_formula_dark.png#gh-dark-mode-only" alt="SAM公式 (深色)" />
+<img src="sam_formula_light.png#gh-light-mode-only" alt="SAM公式 (淺色)" />
 
-- `r = [r₁, r₂, ..., r_B]`：參考光譜向量（**target spectrum**）  
-- `d = [d₁, d₂, ..., d_B]`：像素光譜向量（**image spectrum**）  
-- `pᵢ = dᵢ / sum(d)`：將像素光譜向量正規化為機率分布  
-- `qᵢ = rᵢ / sum(r)`：將目標光譜向量正規化為機率分布  
-- `D(p‖q) = ∑ pᵢ · log(pᵢ / qᵢ)`：p 相對於 q 的 Kullback–Leibler 散度  
-- `SID(d, r) = D(p‖q) + D(q‖p)`：SID 為雙向 K-L 散度的總和  
-- `B`：光譜波段數  
-- SID 越小表示兩光譜越相似
----
+**符號說明：**
 
-## 📐 SAM 公式
-Spectral Angle Mapper (SAM) 是一種用於光譜資料分析的技術，可評估兩個光譜之間的相似程度。它常被應用於高光譜影像處理、分類與目標識別任務中。
-SAM 根據兩個光譜向量之間的夾角進行比對，定義如下：
-
-![SAM](./sam.png)
+- \( \theta \)：SAM 計算出的角度（以弧度表示）
+- \( t \)：目標光譜向量（Target spectrum vector）
+- \( r \)：參考或背景光譜向量（Reference spectrum vector）
+- \( t_i, r_i \)：在第 \(i\) 個波段上的光譜值
+- \( n \)：光譜維度（波段數）
 
 ---
 
-- `r`：參考光譜向量（target spectrum）
-- `d`：像素光譜向量（image spectrum）
-- `theta`：兩光譜之間的角度（以弧度計）
+## 📊 Spectral Information Divergence (SID)
+
+SID 是基於 Kullback-Leibler 散度的非對稱度量，考慮光譜向量的機率分佈，適合處理類別之間的差異性。
+
+<!-- SID 公式圖片 -->
+<img src="sid_formula_dark.png#gh-dark-mode-only" alt="SID公式 (深色)" />
+<img src="sid_formula_light.png#gh-light-mode-only" alt="SID公式 (淺色)" />
+
+**符號說明：**
+
+- \( SID(t, r) \)：目標與背景的光譜資訊散度
+- \( t, r \)：目標與背景光譜向量
+- \( t_i, r_i \)：在第 \(i\) 個波段上的光譜值，已正規化為機率值
+- \( \log \)：自然對數（以 \( e \) 為底）
+- \( n \)：光譜維度（波段數）
+
+---
+
+## ⚡ Constrained Energy Minimization (CEM)
+
+CEM 是一種濾波器設計方法，用來在壓制背景能量的同時強化目標光譜訊號。常用於高光譜目標偵測。
+
+<!-- CEM 公式圖片 -->
+<img src="cem_formula_dark.png#gh-dark-mode-only" alt="CEM公式 (深色)" />
+<img src="cem_formula_light.png#gh-light-mode-only" alt="CEM公式 (淺色)" />
+
+**符號說明：**
+
+- \( \mathbf{w}_{CEM} \)：CEM 計算出的濾波器權重向量
+- \( R \)：背景像素資料的協方差矩陣（Covariance matrix）
+- \( R^{-1} \)：\( R \) 的反矩陣（inverse）
+- \( \mathbf{d} \)：目標光譜向量（Desired target signature）
+- \( \mathbf{d}^T \)：\( \mathbf{d} \) 的轉置
 
 ---
 

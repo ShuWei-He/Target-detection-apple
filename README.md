@@ -53,11 +53,12 @@ CEM 是一種濾波器設計方法，用來在壓制背景能量的同時強化�
 
 **符號說明：**
 
-- \( \mathbf{w}_{CEM} \)：CEM 計算出的濾波器權重向量
-- \( R \)：背景像素資料的協方差矩陣（Covariance matrix）
-- \( R^{-1} \)：\( R \) 的反矩陣（inverse）
-- \( \mathbf{d} \)：目標光譜向量（Desired target signature）
-- \( \mathbf{d}^T \)：\( \mathbf{d} \) 的轉置
+- **w_CEM**：CEM 計算出的濾波器權重向量  
+- **R**：背景像素資料的協方差矩陣（Covariance matrix）  
+- **R⁻¹**：R 的反矩陣（inverse）  
+- **d**：目標光譜向量（Desired target signature）  
+- **dᵀ**：d 的轉置  
+
 
 ---
 

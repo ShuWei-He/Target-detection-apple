@@ -5,7 +5,12 @@
 Constrained Energy Minimization（CEM）是一種經典的目標檢測方法，其核心思想是在保留目標響應的前提下最小化背景響應能量。
 這是一種線性濾波器方法，常用於高光譜影像目標偵測，效果穩定且具備理論支持。
 
-![CEM](./cem.png)
+<!-- 黑底主題 -->
+<img src="sam_formula_dark.png#gh-dark-mode-only" alt="SAM公式（深色）" />
+
+<!-- 白底主題 -->
+<img src="sam_formula_light.png#gh-light-mode-only" alt="SAM公式（淺色）" />
+
 
 
 ### 📘 符號說明：
